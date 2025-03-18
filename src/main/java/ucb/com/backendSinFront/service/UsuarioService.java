@@ -33,13 +33,14 @@ public class UsuarioService {
     public void eliminar(Long id) {
         usuarioRepository.deleteById(id);
     }
+
     public Usuario actualizarUsuario(Long id, Usuario usuarioActualizado) {
         return usuarioRepository.findById(id)
                 .map(usuario -> {
                     usuario.setNombre(usuarioActualizado.getNombre());
                     usuario.setCorreo(usuarioActualizado.getCorreo());
                     usuario.setDiscapacidad(usuarioActualizado.getDiscapacidad());
-                 //   usuario.setPasswordHash(usuarioActualizado.getPasswordHash());
+                    usuario.setPasswordHash(usuarioActualizado.getPasswordHash());
                     return usuarioRepository.save(usuario);
                 })
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado con id: " + id));
